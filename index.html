@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFlow 2026 | Technical Talk Series</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1f2937;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #1e3a8a;
+            --border-color: #e5e7eb;
+            --card-bg: #f9fafb;
+            --tag-bg: #eff6ff;
+            --tag-text: #1d4ed8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            padding-bottom: 4rem;
+        }
+
+        header {
+            background-color: var(--accent-secondary);
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Search & Filter Section */
+        .controls {
+            margin: -2rem auto 3rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Schedule Timeline */
+        .schedule {
+            position: relative;
+        }
+
+        .talk-item {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .time-slot {
+            font-weight: 700;
+            color: var(--accent-secondary);
+            font-size: 1.1rem;
+            text-align: right;
+            padding-top: 0.25rem;
+        }
+
+        .talk-content {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .talk-content:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .talk-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-secondary);
+        }
+
+        .speaker {
+            font-weight: 600;
+            color: #4b5563;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Lunch Break */
+        .break-item {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+            opacity: 0.7;
+        }
+
+        .break-content {
+            border: 2px dashed var(--border-color);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            color: #9ca3af;
+            background: #fdfdfd;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 640px) {
+            .talk-item, .break-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            .time-slot {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>TechFlow 2026</h1>
+        <p>A day of deep dives into the future of technology</p>
+    </div>
+</header>
+
+<main class="container">
+    <section class="controls">
+        <input type="text" id="search" class="search-box" placeholder="Search by category (e.g., AI, Rust, UX)...">
+    </section>
+
+    <section id="schedule" class="schedule">
+        <!-- Rendered by JavaScript -->
+    </section>
+</main>
+
+<script>
+    const talks = [
+        {
+            title: "The Future of Generative AI in Web Dev",
+            speakers: ["Dr. Aris Thorne"],
+            categories: ["AI", "LLM"],
+            start: "10:00 AM",
+            end: "11:00 AM",
+            description: "An exploration of how autonomous agents and large language models are reshaping the modern development workflow."
+        },
+        {
+            title: "Building Scalable Microservices with Rust",
+            speakers: ["Elena Vance"],
+            categories: ["Rust", "Backend"],
+            start: "11:10 AM",
+            end: "12:10 PM",
+            description: "Deep dive into memory safety and performance patterns for cloud-native applications using the Rust ecosystem."
+        },
+        {
+            title: "State of CSS 2026: Container Queries & Beyond",
+            speakers: ["Marcus Chen"],
+            categories: ["CSS", "Frontend"],
+            start: "12:20 PM",
+            end: "01:20 PM",
+            description: "Discover the latest layout primitives and styling capabilities that make modern CSS more powerful than ever."
+        },
+        {
+            type: "break",
+            title: "Lunch Break",
+            start: "01:20 PM",
+            end: "02:20 PM"
+        },
+        {
+            title: "Architecting for Edge Computing",
+            speakers: ["Sarah Jenkins"],
+            categories: ["Edge", "Cloud"],
+            start: "02:20 PM",
+            end: "03:20 PM",
+            description: "How to minimize latency by bringing computation closer to the user without sacrificing data consistency."
+        },
+        {
+            title: "Human-Centric Design for Technical Products",
+            speakers: ["Leo Dupont"],
+            categories: ["UX", "Design"],
+            start: "03:30 PM",
+            end: "04:30 PM",
+            description: "Bridging the gap between complex engineering requirements and intuitive user experiences."
+        },
+        {
+            title: "Quantum-Safe Encryption: A Pragmatic Approach",
+            speakers: ["Dr. Nadia Volkov"],
+            categories: ["Security", "Cryptography"],
+            start: "04:40 PM",
+            end: "05:40 PM",
+            description: "Preparing your infrastructure for the post-quantum era with NIST-approved cryptographic standards."
+        }
+    ];
+
+    function renderSchedule(filter = '') {
+        const scheduleContainer = document.getElementById('schedule');
+        scheduleContainer.innerHTML = '';
+
+        const normalizedFilter = filter.toLowerCase().trim();
+
+        talks.forEach(item => {
+            if (item.type === 'break') {
+                // Only show break if we aren't filtering (or if you prefer to keep it always)
+                if (!normalizedFilter) {
+                    const breakEl = document.createElement('div');
+                    breakEl.className = 'break-item';
+                    breakEl.innerHTML = `
+                        <div class="time-slot">${item.start}</div>
+                        <div class="break-content">${item.title} (1 Hour)</div>
+                    `;
+                    scheduleContainer.appendChild(breakEl);
+                }
+                return;
+            }
+
+            const matchesFilter = !normalizedFilter || 
+                item.categories.some(cat => cat.toLowerCase().includes(normalizedFilter));
+
+            if (matchesFilter) {
+                const talkEl = document.createElement('div');
+                talkEl.className = 'talk-item';
+                talkEl.innerHTML = `
+                    <div class="time-slot">
+                        ${item.start}<br>
+                        <span style="font-weight: 400; font-size: 0.85rem; color: #6b7280">${item.end}</span>
+                    </div>
+                    <div class="talk-content">
+                        <div class="talk-title">${item.title}</div>
+                        <div class="speaker">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path></svg>
+                            ${item.speakers.join(' & ')}
+                        </div>
+                        <div class="description">${item.description}</div>
+                        <div class="tags">
+                            ${item.categories.map(cat => `<span class="tag">${cat}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                scheduleContainer.appendChild(talkEl);
+            }
+        });
+
+        if (scheduleContainer.innerHTML === '' && normalizedFilter) {
+            scheduleContainer.innerHTML = '<div style="text-align: center; color: #6b7280; padding: 3rem;">No talks found matching your search.</div>';
+        }
+    }
+
+    document.getElementById('search').addEventListener('input', (e) => {
+        renderSchedule(e.target.value);
+    });
+
+    // Initial render
+    renderSchedule();
+</script>
+
+</body>
+</html>
